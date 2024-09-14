@@ -164,3 +164,4 @@ cython_debug/
 # custom
 **/chroma/
 .DS_Store
+/annotations-helper/data

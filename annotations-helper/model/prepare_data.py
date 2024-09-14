@@ -7,8 +7,7 @@ from langchain.schema import Document
 from langchain_community.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from langchain_openai import OpenAIEmbeddings
-import openai
+from model.embedding import get_embedding_function
 
 
 # Load the documents from the directory
@@ -20,7 +19,7 @@ def load_documents() -> list[Document]:
     """
     DATA_PATH = os.environ["DATA_PATH"]
 
-    loader = DirectoryLoader(DATA_PATH, glob="*.txt")
+    loader = DirectoryLoader(DATA_PATH, glob="*.md")
     documents = loader.load()
 
     print(f"Loaded {len(documents)} documents.")
@@ -36,7 +35,7 @@ def create_chunks(documents: list[Document]) -> list[Document]:
     :return: List of chunks
     """
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800,  # 800 characters
+        chunk_size=300,  # 300 characters
         chunk_overlap=100,  # 100 characters
         length_function=len,  # Use the len() function to calculate the length of a chunk
         add_start_index=True,  # Add the start index to the chunk
@@ -61,12 +60,12 @@ def create_chroma(from_documents: bool, chunks: list[Document]) -> Chroma:
     if from_documents:
         db = Chroma.from_documents(
             chunks,
-            OpenAIEmbeddings(),  # Use the OpenAIEmbeddings for the vectorization
+            get_embedding_function(),
             persist_directory=CHROMA_PATH,
         )
     else:
         db = Chroma(
-            persist_directory=CHROMA_PATH, embedding_function=OpenAIEmbeddings()
+            persist_directory=CHROMA_PATH, embedding_function=get_embedding_function()
         )
 
     return db
@@ -79,7 +78,7 @@ def prepare_data() -> None:
     :return:
     """
     try:
-        openai.api_key = os.environ["OPENAI_API_KEY"]
+
         CHROMA_PATH = os.environ["CHROMA_PATH"]
         os.environ["DATA_PATH"]
     except KeyError:

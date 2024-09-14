@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "annotations-helper"
+version = "0.1.0"
+description = "LLM that helps with annotation documentation"
+authors = ["anton-cornak"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+langchain = "^0.3.0"
+langchain-chroma = "^0.1.4"
+langchain-community = "^0.3.0"
+chromadb = ">=0.4.0,<0.5.4"
+unstructured = {extras = ["md"], version = "^0.15.12"}
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+flake8 = "^7.1.1"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+[tool.poetry.plugins.dotenv]
+ignore = "false"
