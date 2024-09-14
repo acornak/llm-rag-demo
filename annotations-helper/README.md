@@ -11,3 +11,5 @@ A self-hosted ollama model that helps data team to work with documentation. Unfo
 ## How to run
 - run ollama in the terminal - ```ollama run llama3.1```
 - pull the embedding model from the ollama server - ```ollama pull all-minilm```
+- install dependencies - ```poetry install --no-root```
+- run the chatbot - ```poetry run python main.py```
