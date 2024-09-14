@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ebooks-llm"
 version = "0.1.0"
-description = ""
+description = "LLM Rag demo for Dostoyevsky's novels"
 authors = ["anton-cornak"]
 readme = "README.md"
 
@@ -11,8 +11,8 @@ langchain = "^0.3.0"
 langchain-chroma = "^0.1.4"
 langchain-community = "^0.3.0"
 langchain-openai = "^0.2.0"
-unstructured = "^0.15.12"
 chromadb = ">=0.4.0,<0.5.4"
+unstructured = "^0.15.12"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

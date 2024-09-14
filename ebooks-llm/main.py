@@ -1,5 +1,5 @@
-from rag.prepare_data import prepare_data
-from rag.response import search_db
+from model.prepare_data import prepare_data
+from model.response import search_db
 
 
 def chat() -> None:

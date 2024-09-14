@@ -22,6 +22,9 @@ def load_documents() -> list[Document]:
 
     loader = DirectoryLoader(DATA_PATH, glob="*.txt")
     documents = loader.load()
+
+    print(f"Loaded {len(documents)} documents.")
+
     return documents
 
 
@@ -39,7 +42,11 @@ def create_chunks(documents: list[Document]) -> list[Document]:
         add_start_index=True,  # Add the start index to the chunk
     )
 
-    return text_splitter.split_documents(documents)
+    chunks = text_splitter.split_documents(documents)
+
+    print(f"Created {len(chunks)} chunks.")
+
+    return chunks
 
 
 def create_chroma(from_documents: bool, chunks: list[Document]) -> Chroma:

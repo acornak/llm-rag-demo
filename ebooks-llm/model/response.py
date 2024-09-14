@@ -1,3 +1,7 @@
+"""
+Handling the response generation.
+"""
+
 from langchain_chroma import Chroma
 from langchain.schema import Document
 from langchain.prompts import ChatPromptTemplate
@@ -24,8 +28,8 @@ def search_db(db: Chroma, query: str) -> list[Document]:
     """
     results = db.similarity_search_with_relevance_scores(query, k=3)
 
-    # Filter out the results with a relevance score less than 0.7
-    if len(results) == 0 or results[0][1] < 0.7:
+    # Filter out the results with a relevance score less than 0.6
+    if len(results) == 0 or results[0][1] < 0.6:
         return "Sorry, I couldn't find any relevant information."
 
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _ in results])
